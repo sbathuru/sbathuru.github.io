@@ -38,6 +38,24 @@
       --sans: 'Syne', sans-serif;
     }
 
+    html.light-theme {
+      --bg: #ffffff;
+      --bg2: #f7f7f7;
+      --bg3: #efefef;
+      --surface: #f0f0f0;
+      --surface2: #e8e8e8;
+      --border: rgba(0, 0, 0, 0.08);
+      --border2: rgba(0, 0, 0, 0.12);
+      --text: #1a1a1a;
+      --text2: #666666;
+      --text3: #999999;
+      --accent: #4f8ef7;
+      --accent2: #7c6ff7;
+      --accent3: #00b894;
+      --glow: rgba(79, 142, 247, 0.1);
+      --glow2: rgba(124, 111, 247, 0.08);
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -144,6 +162,37 @@
 
     .nav-links a:hover::after {
       width: 100%;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--border2);
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text2);
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .theme-toggle-icon {
+      font-size: 1rem;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle.light-active .theme-toggle-icon {
+      transform: rotate(180deg);
     }
 
     /* ── SECTIONS ── */
@@ -1013,9 +1062,50 @@
     }
 
     .step-card.collapsed .step-desc,
+    .step-card.collapsed .step-actions,
     .step-card.collapsed .step-tools,
     .step-card.collapsed .step-outcome {
       display: none;
+    }
+
+    .step-actions {
+      list-style: none;
+      counter-reset: step-action;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      padding: 0;
+    }
+
+    .step-actions li {
+      counter-increment: step-action;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .step-actions li::before {
+      content: counter(step-action) ".";
+      color: var(--accent3);
+      font-weight: 500;
+      flex-shrink: 0;
+      min-width: 1.2rem;
+    }
+
+    .step-actions li a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(79, 142, 247, 0.3);
+      transition: border-color 0.2s;
+    }
+
+    .step-actions li a:hover {
+      border-bottom-color: var(--accent);
     }
 
     .step-card:hover {
@@ -1225,14 +1315,20 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">// srinivas.dev</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#transform" style="color:var(--accent3);">Transform</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#transform" style="color:var(--accent3);">Transform</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle-icon">☀️</span>
+        <span class="theme-toggle-text">Light</span>
+      </button>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1539,6 +1635,11 @@
               <div class="step-icon" style="display: flex; gap: 0.4rem;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f8ef7'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" alt="GitHub" style="width: 20px; height: 20px;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f8ef7'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z'/%3E%3C/svg%3E" alt="LinkedIn" style="width: 20px; height: 20px;"></div>
             </div>
             <div class="step-desc">Your online presence is your first impression. Set up GitHub and LinkedIn with a professional photo, clear headline, and a short bio that tells your story. Pin your best work. This is your digital handshake.</div>
+            <ol class="step-actions">
+              <li>Create a GitHub account and add a profile README with your story → <a href="https://github.com/signup" target="_blank">github.com/signup</a></li>
+              <li>Create a LinkedIn account with a professional photo and headline → <a href="https://www.linkedin.com/signup" target="_blank">linkedin.com/signup</a></li>
+              <li>Pin your best repositories and customise your GitHub profile → <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile" target="_blank">GitHub Profile Docs</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">GitHub</span>
               <span class="step-tool">LinkedIn</span>
@@ -1550,26 +1651,68 @@
           <div class="step-card basic-card reveal">
             <div class="step-header">
               <span class="step-num">S·02</span>
-              <div class="step-title">Master AI Tools Daily</div>
-              <div class="step-icon" style="display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end;"><span style="font-size: 0.65rem; background: rgba(79,142,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent);">Claude</span><span style="font-size: 0.65rem; background: rgba(124,111,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent2);">GPT</span></div>
+              <div class="step-title">Master AI Tools &amp; Prompt Engineering</div>
+              <div class="step-icon" style="display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end;"><span style="font-size: 0.65rem; background: rgba(79,142,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent);">Claude</span><span style="font-size: 0.65rem; background: rgba(124,111,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent2);">GPT</span><span style="font-size: 0.65rem; background: rgba(0,212,170,0.15); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent3);">LLM</span></div>
             </div>
-            <div class="step-desc">AI is your new superpower. Use Claude, ChatGPT, Gemini and GitHub Copilot every day — for learning, debugging, writing and exploring. Learn how each tool thinks differently and when to use which.</div>
+            <div class="step-desc">AI is your new superpower — but only if you know how to wield it. Use Claude, ChatGPT, Gemini and GitHub Copilot every single day for learning, debugging, writing and exploring. Then go deeper: master chain-of-thought prompting, role prompting, and few-shot examples to get masterpiece outputs while others get mediocre ones. Learn how each model thinks differently and when to use which.</div>
+            <ol class="step-actions">
+              <li>Sign up for Claude and use it for learning and code review → <a href="https://claude.ai" target="_blank">claude.ai</a></li>
+              <li>Sign up for ChatGPT and explore its coding capabilities → <a href="https://chat.openai.com" target="_blank">chat.openai.com</a></li>
+              <li>Try Google Gemini for research and brainstorming → <a href="https://gemini.google.com" target="_blank">gemini.google.com</a></li>
+              <li>Install GitHub Copilot in VS Code for AI-assisted coding → <a href="https://github.com/features/copilot" target="_blank">github.com/features/copilot</a></li>
+              <li>Read OpenAI's prompt engineering guide to learn best practices → <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank">OpenAI Prompt Guide</a></li>
+              <li>Practice chain-of-thought and few-shot prompting with real tasks → <a href="https://www.promptingguide.ai" target="_blank">promptingguide.ai</a></li>
+              <li>Explore Anthropic's prompt engineering documentation → <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering" target="_blank">Anthropic Docs</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Claude</span>
               <span class="step-tool">ChatGPT</span>
               <span class="step-tool">Gemini</span>
               <span class="step-tool">Copilot</span>
+              <span class="step-tool">Chain-of-Thought</span>
+              <span class="step-tool">Few-Shot</span>
+              <span class="step-tool">Role Prompting</span>
+              <span class="step-tool">RAG Basics</span>
             </div>
-            <div class="step-outcome"><strong>✓ Outcome:</strong> You can 10x your learning speed and solve problems faster than peers who don't use AI.</div>
+            <div class="step-outcome"><strong>✓ Outcome:</strong> You 10x your learning speed and produce better AI outputs than 90% of users — a skill worth more than most certifications.</div>
           </div>
 
           <div class="step-card basic-card reveal">
             <div class="step-header">
               <span class="step-num">S·03</span>
+              <div class="step-title">Linux &amp; Networking Fundamentals</div>
+              <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FCC624' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E" alt="Linux" style="width: 24px; height: 24px;"></div>
+            </div>
+            <div class="step-desc">Before you touch the cloud, you need to understand what it runs on. Linux is the operating system of the internet — every server, every container, every cloud VM. Learn the terminal, file permissions, process management, and basic networking (IP, DNS, TCP/UDP, HTTP). These fundamentals will make you faster and more dangerous at every level of your career.</div>
+            <ol class="step-actions">
+              <li>Learn Linux command line basics with The Linux Command Line (free online) → <a href="https://linuxcommand.org/tlcl.php" target="_blank">linuxcommand.org</a></li>
+              <li>Practice Linux interactively for free → <a href="https://overthewire.org/wargames/bandit" target="_blank">OverTheWire: Bandit</a></li>
+              <li>Understand core networking concepts (IP, DNS, HTTP, TCP/UDP) → <a href="https://roadmap.sh/computer-science" target="_blank">roadmap.sh/computer-science</a></li>
+              <li>Use WSL2 (Windows) or a VirtualBox VM to get a real Linux environment → <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank">WSL2 Install Guide</a></li>
+            </ol>
+            <div class="step-tools">
+              <span class="step-tool">Linux CLI</span>
+              <span class="step-tool">Bash / Shell</span>
+              <span class="step-tool">SSH</span>
+              <span class="step-tool">TCP/IP</span>
+              <span class="step-tool">DNS</span>
+              <span class="step-tool">HTTP/HTTPS</span>
+            </div>
+            <div class="step-outcome"><strong>✓ Outcome:</strong> You can navigate any Linux server confidently and understand how data moves across the internet — the bedrock of all cloud and backend work.</div>
+          </div>
+
+          <div class="step-card basic-card reveal">
+            <div class="step-header">
+              <span class="step-num">S·04</span>
               <div class="step-title">Touch the Cloud</div>
               <div class="step-icon" style="display: flex; gap: 0.4rem;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Crect fill='%23FF9900' x='0' y='0' width='100' height='60' rx='4'/%3E%3Ctext x='50' y='38' font-size='24' font-weight='bold' fill='white' text-anchor='middle'%3EAWS%3C/text%3E%3C/svg%3E" alt="AWS" style="width: 32px; height: 18px;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Crect fill='%230078D4' x='0' y='0' width='100' height='60' rx='4'/%3E%3Ctext x='50' y='40' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EAZURE%3C/text%3E%3C/svg%3E" alt="Azure" style="width: 32px; height: 18px;"></div>
             </div>
             <div class="step-desc">Create a free AWS or Azure account. Launch a virtual machine, store a file in S3 or Blob Storage, and host a static website. Cloud is not optional — it's the foundation of modern engineering.</div>
+            <ol class="step-actions">
+              <li>Create an AWS Free Tier account and launch your first EC2 instance → <a href="https://aws.amazon.com/free" target="_blank">aws.amazon.com/free</a></li>
+              <li>Create an Azure Free account and explore the Azure Portal → <a href="https://azure.microsoft.com/free" target="_blank">azure.microsoft.com/free</a></li>
+              <li>Host a static website on Amazon S3 → <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html" target="_blank">S3 Hosting Guide</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">AWS Free Tier</span>
               <span class="step-tool">Azure Free</span>
@@ -1580,11 +1723,16 @@
 
           <div class="step-card basic-card reveal">
             <div class="step-header">
-              <span class="step-num">S·04</span>
-              <div class="step-title">Learn Git & Version Control</div>
+              <span class="step-num">S·05</span>
+              <div class="step-title">Learn Git &amp; Version Control</div>
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F1502F' d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E" alt="GitHub" style="width: 24px; height: 24px;"></div>
             </div>
             <div class="step-desc">Every professional engineer uses Git daily. Learn commits, branches, pull requests, and merge conflicts. Contribute to your own repos consistently. A green GitHub activity graph speaks louder than a résumé.</div>
+            <ol class="step-actions">
+              <li>Download and install Git on your machine → <a href="https://git-scm.com/downloads" target="_blank">git-scm.com/downloads</a></li>
+              <li>Learn branching, merging, and pull requests on GitHub → <a href="https://docs.github.com/en/get-started" target="_blank">GitHub Get Started</a></li>
+              <li>Practice with the interactive Learn Git Branching tutorial → <a href="https://learngitbranching.js.org" target="_blank">learngitbranching.js.org</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Git</span>
               <span class="step-tool">GitHub</span>
@@ -1594,6 +1742,8 @@
             <div class="step-outcome"><strong>✓ Outcome:</strong> A growing GitHub history that shows you build things consistently.</div>
           </div>
 
+
+
         </div>
       </div>
 
@@ -1602,21 +1752,6 @@
         <div class="phase-label medium reveal">⬡ Phase 02 — Medium · Build real things</div>
         <div class="steps-grid">
 
-          <div class="step-card medium-card reveal">
-            <div class="step-header">
-              <span class="step-num">S·05</span>
-              <div class="step-title">Master Prompt Engineering</div>
-              <div class="step-icon" style="display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: var(--accent);">LLM</div>
-            </div>
-            <div class="step-desc">A bad prompt gives a mediocre answer. A great prompt gives a masterpiece. Learn chain-of-thought prompting, role prompting, few-shot examples, and how to break complex tasks into AI-solvable steps.</div>
-            <div class="step-tools">
-              <span class="step-tool">Chain-of-Thought</span>
-              <span class="step-tool">Few-Shot</span>
-              <span class="step-tool">Role Prompting</span>
-              <span class="step-tool">RAG Basics</span>
-            </div>
-            <div class="step-outcome"><strong>✓ Outcome:</strong> You produce better outputs from AI than 90% of users — a skill worth more than most certifications.</div>
-          </div>
 
           <div class="step-card medium-card reveal">
             <div class="step-header">
@@ -1625,6 +1760,12 @@
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2361DAFB' d='M12 9.861A2.139 2.139 0 1 0 12 14.139 2.139 2.139 0 0 0 12 9.861m0-1.261c-1.9 0-3.4 1.5-3.4 3.4s1.5 3.4 3.4 3.4 3.4-1.5 3.4-3.4-1.5-3.4-3.4-3.4zm0-3.6C5.9 4.861.5 8.062.5 12s5.4 7.139 11.5 7.139S23.5 15.938 23.5 12 18.1 4.861 12 4.861z'/%3E%3C/svg%3E" alt="React" style="width: 24px; height: 24px;"></div>
             </div>
             <div class="step-desc">Build a React app — a portfolio, a tool, a calculator, anything. Push it to GitHub, deploy it to the cloud, and point a custom domain at it. Owning a live app changes your mindset from student to engineer.</div>
+            <ol class="step-actions">
+              <li>Learn React fundamentals from the official tutorial → <a href="https://react.dev/learn" target="_blank">react.dev/learn</a></li>
+              <li>Create a new React project using Vite → <a href="https://vite.dev/guide" target="_blank">vite.dev/guide</a></li>
+              <li>Deploy your app for free on Vercel → <a href="https://vercel.com" target="_blank">vercel.com</a></li>
+              <li>Or deploy to GitHub Pages → <a href="https://pages.github.com" target="_blank">pages.github.com</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">React</span>
               <span class="step-tool">GitHub Pages</span>
@@ -1637,17 +1778,30 @@
           <div class="step-card medium-card reveal">
             <div class="step-header">
               <span class="step-num">S·07</span>
-              <div class="step-title">Build a REST API Backend</div>
-              <div class="step-icon" style="display: flex; gap: 0.3rem;"><span style="font-size: 0.7rem; font-weight: bold; color: #3776ab;">Py</span><span style="font-size: 0.7rem; font-weight: bold; color: #ED8B00;">Java</span></div>
+              <div class="step-title">Build a REST API Backend with Data Structures &amp; Algorithms</div>
+              <div class="step-icon" style="display: flex; gap: 0.3rem;"><span style="font-size: 0.7rem; font-weight: bold; color: #3776ab;">Py</span><span style="font-size: 0.7rem; font-weight: bold; color: #ED8B00;">Java</span><span style="font-size: 0.7rem; font-weight: bold; color: var(--accent3);">DSA</span></div>
             </div>
-            <div class="step-desc">Build a simple CRUD API with Python (FastAPI) or Java (Spring Boot). Connect it to a database. Understand HTTP verbs, status codes, JSON, authentication, and how a frontend talks to a backend.</div>
+            <div class="step-desc">Build a real CRUD API with Python (FastAPI) or Java (Spring Boot) — and go deeper than most engineers do. Understand HTTP verbs, status codes, JSON, and authentication. Then layer in the fundamentals that separate good engineers from great ones: arrays, linked lists, trees, graphs, sorting, searching, and Big-O complexity. Apply these structures directly inside your API logic so you understand both what you're building and why it's efficient.</div>
+            <ol class="step-actions">
+              <li>Build a CRUD API with Python FastAPI → <a href="https://fastapi.tiangolo.com/tutorial" target="_blank">fastapi.tiangolo.com/tutorial</a></li>
+              <li>Or build one with Java Spring Boot → <a href="https://spring.io/guides/gs/rest-service" target="_blank">spring.io/guides</a></li>
+              <li>Test your API endpoints with Postman → <a href="https://www.postman.com/downloads" target="_blank">postman.com/downloads</a></li>
+              <li>Set up a PostgreSQL database → <a href="https://www.postgresql.org/download" target="_blank">postgresql.org/download</a></li>
+              <li>Master DSA fundamentals with the roadmap → <a href="https://roadmap.sh/datastructures-and-algorithms" target="_blank">roadmap.sh/datastructures-and-algorithms</a></li>
+              <li>Practice problems daily on LeetCode (start with Easy) → <a href="https://leetcode.com/problemset" target="_blank">leetcode.com/problemset</a></li>
+              <li>Study algorithm patterns with NeetCode's structured roadmap → <a href="https://neetcode.io/roadmap" target="_blank">neetcode.io/roadmap</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Python / FastAPI</span>
               <span class="step-tool">Java / Spring Boot</span>
               <span class="step-tool">PostgreSQL</span>
               <span class="step-tool">Postman</span>
+              <span class="step-tool">Arrays / Trees</span>
+              <span class="step-tool">Sorting / Search</span>
+              <span class="step-tool">Big-O</span>
+              <span class="step-tool">LeetCode</span>
             </div>
-            <div class="step-outcome"><strong>✓ Outcome:</strong> A full working API that your frontend can consume — you now understand the full stack.</div>
+            <div class="step-outcome"><strong>✓ Outcome:</strong> A full working API you can consume from a frontend — plus the algorithmic thinking to write efficient code and pass technical interviews.</div>
           </div>
 
           <div class="step-card medium-card reveal">
@@ -1657,6 +1811,12 @@
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232496ED' d='M13.983 11.078h2.119a.186.186 0 0 0 .186-.186V9.735a.186.186 0 0 0-.186-.186h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186zm0-2.595h2.119a.186.186 0 0 0 .186-.186V7.14a.186.186 0 0 0-.186-.186h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186zm0-2.595h2.119a.186.186 0 0 0 .186-.186V4.545a.186.186 0 0 0-.186-.186h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186zm-2.594 5.19h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186h2.119a.186.186 0 0 0 .186-.186V11.078a.186.186 0 0 0-.186-.186zm0-2.595h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186h2.119a.186.186 0 0 0 .186-.186V8.478a.186.186 0 0 0-.186-.186zm0-2.595h-2.119a.186.186 0 0 0-.186.186v1.157c0 .102.083.186.186.186h2.119a.186.186 0 0 0 .186-.186V5.883a.186.186 0 0 0-.186-.186z'/%3E%3C/svg%3E" alt="Docker" style="width: 24px; height: 24px;"></div>
             </div>
             <div class="step-desc">Take your app and put it in a Docker container. Write a Dockerfile, build an image, run it locally. Then push it to Docker Hub. This is how real software is shipped in 2026 — no exceptions.</div>
+            <ol class="step-actions">
+              <li>Install Docker Desktop on your machine → <a href="https://www.docker.com/products/docker-desktop" target="_blank">docker.com/desktop</a></li>
+              <li>Write your first Dockerfile with the getting started guide → <a href="https://docs.docker.com/get-started" target="_blank">docs.docker.com/get-started</a></li>
+              <li>Push your image to Docker Hub → <a href="https://hub.docker.com" target="_blank">hub.docker.com</a></li>
+              <li>Use Docker Compose for multi-container setups → <a href="https://docs.docker.com/compose" target="_blank">docs.docker.com/compose</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Docker</span>
               <span class="step-tool">Dockerfile</span>
@@ -1664,6 +1824,31 @@
               <span class="step-tool">Docker Compose</span>
             </div>
             <div class="step-outcome"><strong>✓ Outcome:</strong> Your app runs identically on every machine — no more "it works on my laptop".</div>
+          </div>
+
+          <div class="step-card medium-card reveal">
+            <div class="step-header">
+              <span class="step-num">S·09</span>
+              <div class="step-title">Master Databases — SQL &amp; NoSQL</div>
+              <div class="step-icon" style="display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end;"><span style="font-size: 0.65rem; background: rgba(79,142,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent);">SQL</span><span style="font-size: 0.65rem; background: rgba(0,212,170,0.15); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent3);">NoSQL</span></div>
+            </div>
+            <div class="step-desc">Every application needs to persist data. Learn relational databases deeply — Oracle and PostgreSQL for SQL, schema design, joins, indexing, and stored procedures. Then learn the NoSQL world: MongoDB for documents, Redis for caching, and when to choose which. Understanding both paradigms makes you a complete backend engineer.</div>
+            <ol class="step-actions">
+              <li>Learn SQL fundamentals and practice queries → <a href="https://www.sqltutorial.org" target="_blank">sqltutorial.org</a></li>
+              <li>Get hands-on with Oracle SQL and PL/SQL → <a href="https://livesql.oracle.com" target="_blank">livesql.oracle.com (free)</a></li>
+              <li>Learn MongoDB — the most popular NoSQL database → <a href="https://learn.mongodb.com" target="_blank">learn.mongodb.com</a></li>
+              <li>Understand Redis for caching and session storage → <a href="https://redis.io/learn" target="_blank">redis.io/learn</a></li>
+              <li>Practice database design with real-world schema challenges → <a href="https://dbdiagram.io" target="_blank">dbdiagram.io</a></li>
+            </ol>
+            <div class="step-tools">
+              <span class="step-tool">Oracle DB</span>
+              <span class="step-tool">PL/SQL</span>
+              <span class="step-tool">PostgreSQL</span>
+              <span class="step-tool">MongoDB</span>
+              <span class="step-tool">Redis</span>
+              <span class="step-tool">Schema Design</span>
+            </div>
+            <div class="step-outcome"><strong>✓ Outcome:</strong> You can design, query, and optimise both relational and NoSQL databases — and know exactly which to reach for in any architecture.</div>
           </div>
 
         </div>
@@ -1676,11 +1861,16 @@
 
           <div class="step-card advanced-card reveal">
             <div class="step-header">
-              <span class="step-num">S·09</span>
+              <span class="step-num">S·10</span>
               <div class="step-title">Automate with CI/CD</div>
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold;">Actions</div>
             </div>
             <div class="step-desc">Set up GitHub Actions to automatically test, build and deploy your app every time you push code. Real teams don't deploy manually. Automation is the difference between a hobby project and production software.</div>
+            <ol class="step-actions">
+              <li>Create your first GitHub Actions workflow → <a href="https://docs.github.com/en/actions/quickstart" target="_blank">GitHub Actions Quickstart</a></li>
+              <li>Set up automated testing on every push → <a href="https://docs.github.com/en/actions/automating-builds-and-tests" target="_blank">Automate Tests Guide</a></li>
+              <li>Configure auto-deployment to your cloud → <a href="https://github.com/marketplace?type=actions" target="_blank">GitHub Actions Marketplace</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">GitHub Actions</span>
               <span class="step-tool">YAML Pipelines</span>
@@ -1692,11 +1882,16 @@
 
           <div class="step-card advanced-card reveal">
             <div class="step-header">
-              <span class="step-num">S·10</span>
+              <span class="step-num">S·11</span>
               <div class="step-title">Orchestrate with Kubernetes</div>
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23326CE5' d='M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 20c-4.963 0-9-4.037-9-9s4.037-9 9-9 9 4.037 9 9-4.037 9-9 9z'/%3E%3Ccircle fill='%23326CE5' cx='12' cy='12' r='3'/%3E%3C/svg%3E" alt="Kubernetes" style="width: 24px; height: 24px;"></div>
             </div>
             <div class="step-desc">Learn how Kubernetes manages containers at scale. Deploy a multi-container app to a K8s cluster. Understand pods, services, deployments, and scaling. This is enterprise-level infrastructure knowledge.</div>
+            <ol class="step-actions">
+              <li>Install Minikube and set up a local Kubernetes cluster → <a href="https://minikube.sigs.k8s.io/docs/start" target="_blank">minikube.sigs.k8s.io</a></li>
+              <li>Follow the official Kubernetes basics tutorial → <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics" target="_blank">kubernetes.io/tutorials</a></li>
+              <li>Learn Helm charts for package management → <a href="https://helm.sh/docs" target="_blank">helm.sh/docs</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Kubernetes</span>
               <span class="step-tool">kubectl</span>
@@ -1708,11 +1903,40 @@
 
           <div class="step-card advanced-card reveal">
             <div class="step-header">
-              <span class="step-num">S·11</span>
+              <span class="step-num">S·12</span>
+              <div class="step-title">System Design</div>
+              <div class="step-icon" style="display: flex; gap: 0.3rem;"><span style="font-size: 0.65rem; background: rgba(124,111,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent2);">HLD</span><span style="font-size: 0.65rem; background: rgba(124,111,247,0.2); padding: 0.3rem 0.5rem; border-radius: 2px; color: var(--accent2);">LLD</span></div>
+            </div>
+            <div class="step-desc">This is where junior engineers become senior engineers. Learn to design systems that scale to millions of users — load balancers, caching layers, message queues, databases at scale, CDNs, and microservices. Understand CAP theorem, consistency models, and how to make trade-offs. System design is the language of senior engineering interviews and architecture meetings alike.</div>
+            <ol class="step-actions">
+              <li>Study the System Design Primer (the most complete free resource) → <a href="https://github.com/donnemartin/system-design-primer" target="_blank">System Design Primer on GitHub</a></li>
+              <li>Learn high-level design patterns from ByteByteGo → <a href="https://bytebytego.com" target="_blank">bytebytego.com</a></li>
+              <li>Practice designing real systems: URL shortener, Twitter, Netflix → <a href="https://roadmap.sh/system-design" target="_blank">roadmap.sh/system-design</a></li>
+              <li>Understand distributed systems fundamentals → <a href="https://www.distributed-systems.net/index.php/books/ds4" target="_blank">Distributed Systems (free book)</a></li>
+            </ol>
+            <div class="step-tools">
+              <span class="step-tool">Load Balancing</span>
+              <span class="step-tool">Caching</span>
+              <span class="step-tool">Message Queues</span>
+              <span class="step-tool">CAP Theorem</span>
+              <span class="step-tool">Microservices</span>
+              <span class="step-tool">CDN</span>
+            </div>
+            <div class="step-outcome"><strong>✓ Outcome:</strong> You can walk into any senior engineering interview or architecture discussion and hold your own — the skill that unlocks the next level of your career.</div>
+          </div>
+
+          <div class="step-card advanced-card reveal">
+            <div class="step-header">
+              <span class="step-num">S·13</span>
               <div class="step-title">Build Your First AI Agent</div>
               <div class="step-icon" style="display: flex; gap: 0.3rem;"><span style="font-size: 0.65rem; background: rgba(79,142,247,0.2); padding: 0.3rem 0.4rem; border-radius: 2px; color: var(--accent);">Lang</span><span style="font-size: 0.65rem; background: rgba(79,142,247,0.2); padding: 0.3rem 0.4rem; border-radius: 2px; color: var(--accent);">AI</span></div>
             </div>
             <div class="step-desc">Go beyond using AI tools — build one. Create an agent that uses tools, memory, and reasoning to complete multi-step tasks. This is the fastest-growing skill in the industry right now.</div>
+            <ol class="step-actions">
+              <li>Get your OpenAI API key and make your first API call → <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com</a></li>
+              <li>Build an agent using LangChain framework → <a href="https://python.langchain.com/docs/get_started/introduction" target="_blank">python.langchain.com</a></li>
+              <li>Add RAG with a vector database like Pinecone → <a href="https://www.pinecone.io/learn" target="_blank">pinecone.io/learn</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">LangChain</span>
               <span class="step-tool">OpenAI API</span>
@@ -1720,22 +1944,6 @@
               <span class="step-tool">RAG / Vector DBs</span>
             </div>
             <div class="step-outcome"><strong>✓ Outcome:</strong> You can build AI-powered products, not just use them — a rare and in-demand capability.</div>
-          </div>
-
-          <div class="step-card advanced-card reveal">
-            <div class="step-header">
-              <span class="step-num">S·12</span>
-              <div class="step-title">Contribute to Open Source</div>
-              <div class="step-icon" style="display: flex; align-items: center; justify-content: center;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F1502F' d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E" alt="GitHub" style="width: 24px; height: 24px;"></div>
-            </div>
-            <div class="step-desc">Find a project you use, read its codebase, fix a bug or improve docs. Open a PR. Getting a contribution merged into a real open-source project tells employers more than any certification ever could.</div>
-            <div class="step-tools">
-              <span class="step-tool">GitHub</span>
-              <span class="step-tool">Issues / PRs</span>
-              <span class="step-tool">Code Review</span>
-              <span class="step-tool">Community</span>
-            </div>
-            <div class="step-outcome"><strong>✓ Outcome:</strong> Real public proof that other engineers trust your code enough to merge it.</div>
           </div>
 
         </div>
@@ -1748,11 +1956,16 @@
 
           <div class="step-card elite-card reveal">
             <div class="step-header">
-              <span class="step-num">S·13</span>
+              <span class="step-num">S·14</span>
               <div class="step-title">Get a Cloud Certification</div>
               <div class="step-icon" style="display: flex; gap: 0.3rem;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23FF9900' x='0' y='0' width='40' height='40' rx='3'/%3E%3Ctext x='20' y='26' font-size='14' font-weight='bold' fill='white' text-anchor='middle'%3EAWS%3C/text%3E%3C/svg%3E" alt="AWS" style="width: 18px; height: 18px;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%230078D4' x='0' y='0' width='40' height='40' rx='3'/%3E%3Ctext x='20' y='26' font-size='12' font-weight='bold' fill='white' text-anchor='middle'%3EAZ%3C/text%3E%3C/svg%3E" alt="Azure" style="width: 18px; height: 18px;"></div>
             </div>
             <div class="step-desc">Earn AWS Solutions Architect Associate or Azure Fundamentals. Certifications validate your cloud knowledge to employers and give you structured, deep knowledge of the platforms powering every tech company.</div>
+            <ol class="step-actions">
+              <li>Start with AWS Cloud Practitioner (CLF-C02) → <a href="https://aws.amazon.com/certification/certified-cloud-practitioner" target="_blank">AWS Cloud Practitioner</a></li>
+              <li>Level up to AWS Solutions Architect Associate → <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate" target="_blank">AWS SAA-C03</a></li>
+              <li>Or start with Azure Fundamentals (AZ-900) → <a href="https://learn.microsoft.com/en-us/certifications/azure-fundamentals" target="_blank">Azure AZ-900</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">AWS SAA-C03</span>
               <span class="step-tool">AZ-900</span>
@@ -1764,11 +1977,16 @@
 
           <div class="step-card elite-card reveal">
             <div class="step-header">
-              <span class="step-num">S·14</span>
+              <span class="step-num">S·15</span>
               <div class="step-title">Build in Public</div>
               <div class="step-icon" style="display: flex; gap: 0.3rem;"><span style="font-size: 0.6rem; font-weight: bold; color: #0A66C2;">in</span><span style="font-size: 0.6rem; font-weight: bold; color: #00ab44;">dev</span></div>
             </div>
             <div class="step-desc">Document your journey on LinkedIn. Share what you're building, what you learned, what broke and how you fixed it. Consistency over perfection. The engineers who write about their work get noticed — every time.</div>
+            <ol class="step-actions">
+              <li>Post your learnings and projects on LinkedIn regularly → <a href="https://www.linkedin.com" target="_blank">linkedin.com</a></li>
+              <li>Write technical articles on Dev.to → <a href="https://dev.to" target="_blank">dev.to</a></li>
+              <li>Start a developer blog on Hashnode → <a href="https://hashnode.com" target="_blank">hashnode.com</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">LinkedIn Posts</span>
               <span class="step-tool">Dev.to</span>
@@ -1780,11 +1998,17 @@
 
           <div class="step-card elite-card reveal">
             <div class="step-header">
-              <span class="step-num">S·15</span>
+              <span class="step-num">S·16</span>
               <div class="step-title">Ship a Full SaaS Product</div>
               <div class="step-icon" style="display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold;">SaaS</div>
             </div>
             <div class="step-desc">Combine everything you've learned. Build a small SaaS — a tool that solves a real problem. Frontend, backend, database, auth, cloud deployment, CI/CD, and an AI feature. Launch it. Even 10 users changes your worldview.</div>
+            <ol class="step-actions">
+              <li>Plan your architecture using the software design roadmap → <a href="https://roadmap.sh/software-design-architecture" target="_blank">roadmap.sh</a></li>
+              <li>Add authentication with Auth0 → <a href="https://auth0.com" target="_blank">auth0.com</a></li>
+              <li>Set up payments with Stripe → <a href="https://stripe.com/docs" target="_blank">stripe.com/docs</a></li>
+              <li>Launch your product on Product Hunt → <a href="https://www.producthunt.com" target="_blank">producthunt.com</a></li>
+            </ol>
             <div class="step-tools">
               <span class="step-tool">Full Stack</span>
               <span class="step-tool">Auth / Payments</span>
@@ -1858,6 +2082,26 @@
           ? 'var(--text)' : '';
       });
     });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-toggle-icon');
+    const themeText = themeToggle.querySelector('.theme-toggle-text');
+
+    const applyTheme = (isLight) => {
+      document.documentElement.classList.toggle('light-theme', isLight);
+      themeToggle.classList.toggle('light-active', isLight);
+      themeIcon.textContent = isLight ? '🌙' : '☀️';
+      themeText.textContent = isLight ? 'Dark' : 'Light';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    };
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = !document.documentElement.classList.contains('light-theme');
+      applyTheme(isLight);
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    applyTheme(savedTheme === 'light');
   </script>
 </body>
 

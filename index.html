@@ -830,6 +830,211 @@
     .project-arrow { display: none; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
+  /* ── TRANSFORM ── */
+  #transform { padding: 6rem 0; background: var(--bg); }
+
+  .transform-intro {
+    max-width: 680px;
+    margin-bottom: 4rem;
+  }
+
+  .transform-intro p {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.9;
+  }
+
+  .transform-intro p span { color: var(--accent3); }
+
+  .phase-block { margin-bottom: 4rem; }
+
+  .phase-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+    margin-bottom: 2.5rem;
+  }
+
+  .phase-label.basic {
+    background: rgba(0,212,170,0.08);
+    color: var(--accent3);
+    border: 1px solid rgba(0,212,170,0.2);
+  }
+
+  .phase-label.medium {
+    background: rgba(79,142,247,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(79,142,247,0.2);
+  }
+
+  .phase-label.advanced {
+    background: rgba(124,111,247,0.08);
+    color: var(--accent2);
+    border: 1px solid rgba(124,111,247,0.2);
+  }
+
+  .phase-label.elite {
+    background: rgba(255,180,0,0.08);
+    color: #ffb400;
+    border: 1px solid rgba(255,180,0,0.2);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .step-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .step-card.basic-card:hover { border-color: rgba(0,212,170,0.25); }
+  .step-card.medium-card:hover { border-color: rgba(79,142,247,0.25); }
+  .step-card.advanced-card:hover { border-color: rgba(124,111,247,0.25); }
+  .step-card.elite-card:hover { border-color: rgba(255,180,0,0.25); }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .basic-card::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+  .medium-card::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .advanced-card::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+  .elite-card::before { background: linear-gradient(90deg, #ffb400, transparent); }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .basic-card .step-num { background: rgba(0,212,170,0.1); color: var(--accent3); }
+  .medium-card .step-num { background: rgba(79,142,247,0.1); color: var(--accent); }
+  .advanced-card .step-num { background: rgba(124,111,247,0.1); color: var(--accent2); }
+  .elite-card .step-num { background: rgba(255,180,0,0.1); color: #ffb400; }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .step-icon {
+    font-size: 1.4rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .step-desc {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text3);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .step-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .step-tool {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    padding: 0.22rem 0.55rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text3);
+    background: var(--bg);
+  }
+
+  .step-outcome {
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    line-height: 1.7;
+  }
+
+  .step-outcome strong { color: var(--text2); }
+
+  .transform-cta {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .transform-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent), var(--accent2), #ffb400);
+  }
+
+  .transform-cta-text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+  }
+
+  .transform-cta-text p {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text3);
+    line-height: 1.7;
+  }
+
 </style>
 </head>
 <body>
@@ -844,6 +1049,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#transform" style="color:var(--accent3);">Transform</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -909,13 +1115,12 @@
       <div class="about-card reveal">
         <div class="about-card-label">// current stack</div>
         <ul class="stack-list">
-          <li class="stack-item"><span class="stack-dot"></span>Git · Linux</li>
-          <li class="stack-item"><span class="stack-dot"></span>React</li>
-          <li class="stack-item"><span class="stack-dot"></span>Java · Spring Boot · Python</li>
-          <li class="stack-item"><span class="stack-dot"></span>Oracle PL/SQL</li>
-          <li class="stack-item"><span class="stack-dot"></span>Docker · Kubernetes</li>
-          <li class="stack-item"><span class="stack-dot"></span>GitHub Actions · AWS · Azure</li>
           <li class="stack-item"><span class="stack-dot"></span>Agentic AI</li>
+          <li class="stack-item"><span class="stack-dot"></span>Cloud — AWS · Azure</li>
+          <li class="stack-item"><span class="stack-dot"></span>DevOps — Linux · Git · GitHub Actions · Docker · Kubernetes</li>
+          <li class="stack-item"><span class="stack-dot"></span>Python</li>
+          <li class="stack-item"><span class="stack-dot"></span>React</li>
+          <li class="stack-item"><span class="stack-dot"></span>Java · Spring Boot</li>
         </ul>
         <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
           <div class="about-card-label" style="margin-bottom:0.75rem;">// based in</div>
@@ -936,6 +1141,38 @@
     </div>
     <div class="skills-grid">
       <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">Agentic AI</div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Building autonomous AI agents and LLM-powered workflows.</div>
+        <div class="skill-tags">
+          <span class="tag">LLM Agents</span><span class="tag">LangChain</span><span class="tag">OpenAI API</span><span class="tag">RAG</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud — AWS & Azure</div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Deploying and scaling cloud-native applications across major platforms.</div>
+        <div class="skill-tags">
+          <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Cloud Infra</span><span class="tag">Serverless</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐳</div>
+        <div class="skill-name">DevOps & Containers</div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Containerising and orchestrating apps, automating CI/CD pipelines end-to-end.</div>
+        <div class="skill-tags">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">GitHub Actions</span><span class="tag">Git</span><span class="tag">Linux</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Scripting, automation, data processing and backend APIs.</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Automation</span><span class="tag">Scripting</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
         <div class="skill-icon">☕</div>
         <div class="skill-name">Java & Spring Boot</div>
         <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Building enterprise-grade backend services and microservices.</div>
@@ -952,43 +1189,11 @@
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-icon">🐍</div>
-        <div class="skill-name">Python</div>
-        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Scripting, automation, data processing and backend APIs.</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Automation</span><span class="tag">Scripting</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
         <div class="skill-icon">🗄️</div>
         <div class="skill-name">Oracle PL/SQL</div>
         <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Stored procedures, query optimization and database design.</div>
         <div class="skill-tags">
           <span class="tag">Oracle DB</span><span class="tag">PL/SQL</span><span class="tag">Stored Procs</span><span class="tag">Tuning</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🐳</div>
-        <div class="skill-name">DevOps & Containers</div>
-        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Containerising and orchestrating apps, automating CI/CD pipelines end-to-end.</div>
-        <div class="skill-tags">
-          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">GitHub Actions</span><span class="tag">Git</span><span class="tag">Linux</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">☁️</div>
-        <div class="skill-name">Cloud — AWS & Azure</div>
-        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Deploying and scaling cloud-native applications across major platforms.</div>
-        <div class="skill-tags">
-          <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Cloud Infra</span><span class="tag">Serverless</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🤖</div>
-        <div class="skill-name">Agentic AI</div>
-        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--text3); line-height:1.7;">Building autonomous AI agents and LLM-powered workflows.</div>
-        <div class="skill-tags">
-          <span class="tag">LLM Agents</span><span class="tag">LangChain</span><span class="tag">OpenAI API</span><span class="tag">RAG</span>
         </div>
       </div>
     </div>
@@ -1128,6 +1333,301 @@
 </section>
 
 <!-- FOOTER -->
+<!-- TRANSFORM -->
+<section id="transform">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Transform</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="transform-intro reveal">
+      <p>A structured roadmap for <span>Computer Science Engineering students</span> to go from zero to industry-ready. Each phase builds on the previous one. Don't rush — depth beats speed every time. The goal is not just a job, but a <span>career you own</span>.</p>
+    </div>
+
+    <!-- BASIC -->
+    <div class="phase-block">
+      <div class="phase-label basic reveal">⬡ Phase 01 — Basic · Build your digital identity</div>
+      <div class="steps-grid">
+
+        <div class="step-card basic-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·01</span>
+            <div class="step-title">Create your Digital Bio</div>
+            <div class="step-icon">🪪</div>
+          </div>
+          <div class="step-desc">Your online presence is your first impression. Set up GitHub and LinkedIn with a professional photo, clear headline, and a short bio that tells your story. Pin your best work. This is your digital handshake.</div>
+          <div class="step-tools">
+            <span class="step-tool">GitHub</span>
+            <span class="step-tool">LinkedIn</span>
+            <span class="step-tool">Profile README</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> A searchable, professional online profile that recruiters and collaborators can find.</div>
+        </div>
+
+        <div class="step-card basic-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·02</span>
+            <div class="step-title">Master AI Tools Daily</div>
+            <div class="step-icon">🤖</div>
+          </div>
+          <div class="step-desc">AI is your new superpower. Use Claude, ChatGPT, Gemini and GitHub Copilot every day — for learning, debugging, writing and exploring. Learn how each tool thinks differently and when to use which.</div>
+          <div class="step-tools">
+            <span class="step-tool">Claude</span>
+            <span class="step-tool">ChatGPT</span>
+            <span class="step-tool">Gemini</span>
+            <span class="step-tool">Copilot</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You can 10x your learning speed and solve problems faster than peers who don't use AI.</div>
+        </div>
+
+        <div class="step-card basic-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·03</span>
+            <div class="step-title">Touch the Cloud</div>
+            <div class="step-icon">☁️</div>
+          </div>
+          <div class="step-desc">Create a free AWS or Azure account. Launch a virtual machine, store a file in S3 or Blob Storage, and host a static website. Cloud is not optional — it's the foundation of modern engineering.</div>
+          <div class="step-tools">
+            <span class="step-tool">AWS Free Tier</span>
+            <span class="step-tool">Azure Free</span>
+            <span class="step-tool">EC2 / S3</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You've deployed something real to the internet on your own infrastructure.</div>
+        </div>
+
+        <div class="step-card basic-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·04</span>
+            <div class="step-title">Learn Git & Version Control</div>
+            <div class="step-icon">🌿</div>
+          </div>
+          <div class="step-desc">Every professional engineer uses Git daily. Learn commits, branches, pull requests, and merge conflicts. Contribute to your own repos consistently. A green GitHub activity graph speaks louder than a résumé.</div>
+          <div class="step-tools">
+            <span class="step-tool">Git</span>
+            <span class="step-tool">GitHub</span>
+            <span class="step-tool">Branching</span>
+            <span class="step-tool">Pull Requests</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> A growing GitHub history that shows you build things consistently.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="phase-block">
+      <div class="phase-label medium reveal">⬡ Phase 02 — Medium · Build real things</div>
+      <div class="steps-grid">
+
+        <div class="step-card medium-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·05</span>
+            <div class="step-title">Master Prompt Engineering</div>
+            <div class="step-icon">🧠</div>
+          </div>
+          <div class="step-desc">A bad prompt gives a mediocre answer. A great prompt gives a masterpiece. Learn chain-of-thought prompting, role prompting, few-shot examples, and how to break complex tasks into AI-solvable steps.</div>
+          <div class="step-tools">
+            <span class="step-tool">Chain-of-Thought</span>
+            <span class="step-tool">Few-Shot</span>
+            <span class="step-tool">Role Prompting</span>
+            <span class="step-tool">RAG Basics</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You produce better outputs from AI than 90% of users — a skill worth more than most certifications.</div>
+        </div>
+
+        <div class="step-card medium-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·06</span>
+            <div class="step-title">Build & Ship a Frontend App</div>
+            <div class="step-icon">🚀</div>
+          </div>
+          <div class="step-desc">Build a React app — a portfolio, a tool, a calculator, anything. Push it to GitHub, deploy it to the cloud, and point a custom domain at it. Owning a live app changes your mindset from student to engineer.</div>
+          <div class="step-tools">
+            <span class="step-tool">React</span>
+            <span class="step-tool">GitHub Pages</span>
+            <span class="step-tool">Netlify / Vercel</span>
+            <span class="step-tool">Custom Domain</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> A live URL you can share with anyone. Your first proof of real-world shipping.</div>
+        </div>
+
+        <div class="step-card medium-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·07</span>
+            <div class="step-title">Build a REST API Backend</div>
+            <div class="step-icon">⚙️</div>
+          </div>
+          <div class="step-desc">Build a simple CRUD API with Python (FastAPI) or Java (Spring Boot). Connect it to a database. Understand HTTP verbs, status codes, JSON, authentication, and how a frontend talks to a backend.</div>
+          <div class="step-tools">
+            <span class="step-tool">Python / FastAPI</span>
+            <span class="step-tool">Java / Spring Boot</span>
+            <span class="step-tool">PostgreSQL</span>
+            <span class="step-tool">Postman</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> A full working API that your frontend can consume — you now understand the full stack.</div>
+        </div>
+
+        <div class="step-card medium-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·08</span>
+            <div class="step-title">Containerise Everything</div>
+            <div class="step-icon">🐳</div>
+          </div>
+          <div class="step-desc">Take your app and put it in a Docker container. Write a Dockerfile, build an image, run it locally. Then push it to Docker Hub. This is how real software is shipped in 2026 — no exceptions.</div>
+          <div class="step-tools">
+            <span class="step-tool">Docker</span>
+            <span class="step-tool">Dockerfile</span>
+            <span class="step-tool">Docker Hub</span>
+            <span class="step-tool">Docker Compose</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> Your app runs identically on every machine — no more "it works on my laptop".</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ADVANCED -->
+    <div class="phase-block">
+      <div class="phase-label advanced reveal">⬡ Phase 03 — Advanced · Think like an engineer</div>
+      <div class="steps-grid">
+
+        <div class="step-card advanced-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·09</span>
+            <div class="step-title">Automate with CI/CD</div>
+            <div class="step-icon">⚡</div>
+          </div>
+          <div class="step-desc">Set up GitHub Actions to automatically test, build and deploy your app every time you push code. Real teams don't deploy manually. Automation is the difference between a hobby project and production software.</div>
+          <div class="step-tools">
+            <span class="step-tool">GitHub Actions</span>
+            <span class="step-tool">YAML Pipelines</span>
+            <span class="step-tool">Unit Tests</span>
+            <span class="step-tool">Auto Deploy</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> Every git push automatically tests and ships your code. You think in pipelines, not steps.</div>
+        </div>
+
+        <div class="step-card advanced-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·10</span>
+            <div class="step-title">Orchestrate with Kubernetes</div>
+            <div class="step-icon">🎛️</div>
+          </div>
+          <div class="step-desc">Learn how Kubernetes manages containers at scale. Deploy a multi-container app to a K8s cluster. Understand pods, services, deployments, and scaling. This is enterprise-level infrastructure knowledge.</div>
+          <div class="step-tools">
+            <span class="step-tool">Kubernetes</span>
+            <span class="step-tool">kubectl</span>
+            <span class="step-tool">Pods / Services</span>
+            <span class="step-tool">Helm</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You can deploy and manage resilient apps that self-heal and scale — a highly valued skill.</div>
+        </div>
+
+        <div class="step-card advanced-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·11</span>
+            <div class="step-title">Build Your First AI Agent</div>
+            <div class="step-icon">🧬</div>
+          </div>
+          <div class="step-desc">Go beyond using AI tools — build one. Create an agent that uses tools, memory, and reasoning to complete multi-step tasks. This is the fastest-growing skill in the industry right now.</div>
+          <div class="step-tools">
+            <span class="step-tool">LangChain</span>
+            <span class="step-tool">OpenAI API</span>
+            <span class="step-tool">Tool Use</span>
+            <span class="step-tool">RAG / Vector DBs</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You can build AI-powered products, not just use them — a rare and in-demand capability.</div>
+        </div>
+
+        <div class="step-card advanced-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·12</span>
+            <div class="step-title">Contribute to Open Source</div>
+            <div class="step-icon">🌍</div>
+          </div>
+          <div class="step-desc">Find a project you use, read its codebase, fix a bug or improve docs. Open a PR. Getting a contribution merged into a real open-source project tells employers more than any certification ever could.</div>
+          <div class="step-tools">
+            <span class="step-tool">GitHub</span>
+            <span class="step-tool">Issues / PRs</span>
+            <span class="step-tool">Code Review</span>
+            <span class="step-tool">Community</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> Real public proof that other engineers trust your code enough to merge it.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ELITE -->
+    <div class="phase-block">
+      <div class="phase-label elite reveal">⬡ Phase 04 — Elite · Own your career</div>
+      <div class="steps-grid">
+
+        <div class="step-card elite-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·13</span>
+            <div class="step-title">Get a Cloud Certification</div>
+            <div class="step-icon">🏅</div>
+          </div>
+          <div class="step-desc">Earn AWS Solutions Architect Associate or Azure Fundamentals. Certifications validate your cloud knowledge to employers and give you structured, deep knowledge of the platforms powering every tech company.</div>
+          <div class="step-tools">
+            <span class="step-tool">AWS SAA-C03</span>
+            <span class="step-tool">AZ-900</span>
+            <span class="step-tool">AZ-204</span>
+            <span class="step-tool">Cloud Practitioner</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> A globally recognised credential that opens doors and validates your cloud engineering skills.</div>
+        </div>
+
+        <div class="step-card elite-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·14</span>
+            <div class="step-title">Build in Public</div>
+            <div class="step-icon">📢</div>
+          </div>
+          <div class="step-desc">Document your journey on LinkedIn. Share what you're building, what you learned, what broke and how you fixed it. Consistency over perfection. The engineers who write about their work get noticed — every time.</div>
+          <div class="step-tools">
+            <span class="step-tool">LinkedIn Posts</span>
+            <span class="step-tool">Dev.to</span>
+            <span class="step-tool">Hashnode</span>
+            <span class="step-tool">GitHub README</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> An audience, a reputation, and inbound opportunities from people who found your work.</div>
+        </div>
+
+        <div class="step-card elite-card reveal">
+          <div class="step-header">
+            <span class="step-num">S·15</span>
+            <div class="step-title">Ship a Full SaaS Product</div>
+            <div class="step-icon">💡</div>
+          </div>
+          <div class="step-desc">Combine everything you've learned. Build a small SaaS — a tool that solves a real problem. Frontend, backend, database, auth, cloud deployment, CI/CD, and an AI feature. Launch it. Even 10 users changes your worldview.</div>
+          <div class="step-tools">
+            <span class="step-tool">Full Stack</span>
+            <span class="step-tool">Auth / Payments</span>
+            <span class="step-tool">AI Feature</span>
+            <span class="step-tool">Real Users</span>
+          </div>
+          <div class="step-outcome"><strong>✓ Outcome:</strong> You've shipped a product. You're no longer a student — you're an engineer who builds things the world uses.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="transform-cta reveal">
+      <div class="transform-cta-text">
+        <h3>Your journey starts with one commit.</h3>
+        <p>Don't wait to feel ready. Create your GitHub account today, push your first file, and begin. Every senior engineer you admire was once exactly where you are now. The only difference is they started.</p>
+      </div>
+      <a href="https://github.com/sbathuru" target="_blank" class="btn btn-primary">See how I built mine →</a>
+    </div>
+
+  </div>
+</section>
+
 <footer>
   <div class="footer-copy">© 2026 <span>Srinivas</span> — Built with purpose.</div>
   <div class="footer-right">Hyderabad, India · Optum</div>
